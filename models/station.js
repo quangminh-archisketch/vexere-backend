@@ -26,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           checkLen(value) {
-            if (value.length >= 5 && value.length <= 20) {
+            if (value.length >= 5 && value.length <= 1000) {
               return true
             } else {
-              throw new Error('độ dài phải từ 5 - 20')
+              throw new Error('độ dài phải từ 5 - 1000')
             }
           },
         },
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isIn: [['HCM', 'DN', 'CT', 'HP', 'HN']],
+          isIn: [['HCM', 'DN', 'CT', 'HP', 'HN', 'QNAM', 'QNHON']],
         },
       },
     },
