@@ -5,7 +5,7 @@ const createStation = async (req, res) => {
   const { name, address, province } = req.body
   try {
     const newStation = await Station.create({ name, address, province })
-    res.status(200).send({ data: newStation, statusCode: '200', message: 'Success' })
+    res.status(201).send({ data: newStation, statusCode: '200', message: 'Success' })
   } catch (error) {
     res.status(500).send({ error, statusCode: '500', message: 'UnSuccess' })
   }
