@@ -1,5 +1,7 @@
 const { User } = require('../models')
 const bcrypt = require('bcrypt')
+const multer = require('multer')
+
 const jwt = require('jsonwebtoken')
 
 const register = async (req, res) => {
@@ -28,7 +30,7 @@ const login = async (req, res) => {
     // b2 : kiểm mật khẩu có đúng hay không
     const isAuth = bcrypt.compareSync(password, user.password)
     if (isAuth) {
-      const token = jwt.sign({ email: user.email, type: user.type }, 'bearer', { expiresIn: 60 * 60 })
+      const token = jwt.sign({ email: user.email, type: user.type }, 'quangminh-1398', { expiresIn: 60 * 60 })
 
       res.status(200).send({ message: 'Login to Success ! ', token })
     } else {
@@ -39,7 +41,20 @@ const login = async (req, res) => {
   }
 }
 
+const uploadAvatar = async (req, res) => {
+  const { file } = req
+  const urlImage = `http://localhost:3000/${file.path}`
+  const { user } = req
+  const userFound = await User.findOne({
+    email: user.email,
+  })
+  userFound.avatar = urlImage
+  await userFound.save()
+  res.send(userFound)
+}
+
 module.exports = {
   register,
   login,
+  uploadAvatar,
 }

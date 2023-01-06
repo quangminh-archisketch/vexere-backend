@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isIn: [['HCM', 'DN', 'CT', 'HP', 'HN', 'QNAM', 'QNHON']],
+          isIn: [['HCM', 'DN', 'CT', 'HP', 'HN', 'QNAM', 'QNHON', 'HUE']],
         },
       },
     },
